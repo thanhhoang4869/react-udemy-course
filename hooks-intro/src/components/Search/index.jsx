@@ -20,16 +20,14 @@ const Search = () => {
       setResults(data.query.search);
     };
 
-    const timeOutId = (setTimeout =
-      (() => {
-        if (term) {
-          search();
-        }
-      },
-      1000));
+    const timeoutId = setTimeout(() => {
+      if (term) {
+        search();
+      }
+    }, 1000);
 
     return () => {
-      clearTimeout(timeOutId);
+      clearTimeout(timeoutId);
     };
   }, [term]);
 
