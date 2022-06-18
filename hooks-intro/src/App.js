@@ -3,8 +3,10 @@ import Accordion from "./components/Accordion";
 import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
 import Translate from "./components/Translate";
-import Route from "./components/Route";
+// import Route from "./components/Route";
 import Header from "./components/Header";
+
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const items = [
   {
@@ -36,13 +38,35 @@ const options = [
   },
 ];
 
-
 const App = () => {
   const [selected, setSelected] = useState(options[0]);
 
   return (
     <div>
-      <Header />
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Accordion items={items} />} />
+          <Route path="/list" element={<Search />} />
+          <Route
+            path="/dropdown"
+            element={
+              <Dropdown
+                label="Select a color"
+                options={options}
+                selected={selected}
+                onSelectedChange={setSelected}
+              />
+            }
+          />
+           <Route
+            path="/translate"
+            element={
+              <Translate />
+            }/>
+        </Routes>
+      </Router>
+      {/* 
       <Route path="/">
         <Accordion items={items} />
       </Route>
@@ -59,7 +83,7 @@ const App = () => {
       </Route>
       <Route path="/translate">
         <Translate />
-      </Route>
+      </Route> */}
     </div>
   );
 };
